@@ -1,5 +1,9 @@
 package com.exercise.core;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -9,6 +13,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "multiple_choice")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class MultipleChoice {
     @Id
     @GeneratedValue

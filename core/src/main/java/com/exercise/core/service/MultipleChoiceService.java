@@ -35,4 +35,8 @@ public class MultipleChoiceService {
     public MultipleChoice findMultipleChoiceById(long id) {
         return multipleChoiceDAO.findMultipleChoiceById(id);
     }
+
+    public List<MultipleChoice> listMultipleChoice() {
+        return multipleChoiceDAO.listMultipleChoice();
+    }
 }

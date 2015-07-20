@@ -1,14 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="exerciseApp">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
 </head>
-<body>
+<body ng-controller="multipleChoiceController">
 <div>
-    <ul>
-        <li><a href="/web/multiple-choice">单选题</a></li>
-    </ul>
+    <div ng-repeat="multipleChoice in multipleChoices">
+        {{multipleChoice.content}}
+        <div ng-repeat="selection in multipleChoice.multipleChoiceSelections">
+            <input type="radio" name="selection{{multipleChoice.id}}" value="selection.id"/>
+            {{selection.content}}
+        </div>
+    </div>
 </div>
+<script src="./js/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./js/bower_components/angular/angular.min.js"></script>
+<script src="./js/app/exerciseApp.js"></script>
+<script>
+    $(document).ready(function () {
+        $.getJSON("/web/api/list", function (json) {
+            json.forEach(function (value) {
+                console.log(value.content);
+                value.multipleChoiceSelections.forEach(function (value) {
+                    console.log(value.answer);
+                })
+            })
+        });
+    });
+</script>
 </body>
 </html>

@@ -46,8 +46,8 @@
 </div>
 <script>
     $(document).ready(function () {
-        var selectionId = ${selectionId};
-        $("#selection" + selectionId).attr("checked", true);
+        console.log($("form").serializeArray());
+        $("#selection" + "${selectionId}").attr("checked", true);
     })
 </script>
 </body>

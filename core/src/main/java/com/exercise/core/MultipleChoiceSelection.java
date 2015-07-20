@@ -16,7 +16,7 @@ public class MultipleChoiceSelection {
     private String content;
 
     @Column(name = "is_answer")
-    private int answer;
+    private boolean answer;
 
     @Column(name = "description")
     private String description;
@@ -42,7 +42,7 @@ public class MultipleChoiceSelection {
     }
 
     public boolean isAnswer() {
-        return answer == 1;
+        return answer;
     }
 
     public String getDescription() {
@@ -61,7 +61,7 @@ public class MultipleChoiceSelection {
         this.multipleChoice = multipleChoice;
     }
 
-    public void setAnswer(int answer) {
+    public void setAnswer(boolean answer) {
         this.answer = answer;
     }
 }
