@@ -1,0 +1,13 @@
+.idea/
+.gradle/
+build/
+out/
+*.bat
+*.iml
+*.ipr
+*.iws
+bower_components/
+*.obj
+*.o
+components/
+classes/
