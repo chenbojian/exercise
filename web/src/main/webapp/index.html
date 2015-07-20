@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+    <link rel="stylesheet" href="./js/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
 <body ng-controller="multipleChoiceController">
 <div>
-    <div ng-repeat="multipleChoice in multipleChoices">
+    <div>
         {{multipleChoice.content}}
         <div ng-repeat="selection in multipleChoice.multipleChoiceSelections">
             <input type="radio" name="selection{{multipleChoice.id}}" value="selection.id"/>
             {{selection.content}}
         </div>
+        <a class="btn btn-default" ng-click="isFinish ? finish() : next_multiple_choice()">下一题</a>
+
     </div>
 </div>
 <script src="./js/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="./js/bower_components/angular/angular.min.js"></script>
 <script src="./js/app/exerciseApp.js"></script>
 <script>
-    $(document).ready(function () {
-        $.getJSON("/web/api/list", function (json) {
-            json.forEach(function (value) {
-                console.log(value.content);
-                value.multipleChoiceSelections.forEach(function (value) {
-                    console.log(value.answer);
-                })
-            })
-        });
-    });
+//    $(document).ready(function () {
+//        $.getJSON("/web/api/list", function (json) {
+//            json.forEach(function (value) {
+//                console.log(value.content);
+//                value.multipleChoiceSelections.forEach(function (value) {
+//                    console.log(value.answer);
+//                })
+//            })
+//        });
+//    });
 </script>
 </body>
 </html>
