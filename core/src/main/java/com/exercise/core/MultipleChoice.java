@@ -1,8 +1,7 @@
 package com.exercise.core;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by chenbojian on 7/20/15.
@@ -18,8 +17,8 @@ public class MultipleChoice {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "multiple_choice")
-    private Set<MultipleChoiceSelection> multipleChoiceSelections = new HashSet<MultipleChoiceSelection>();
+    @OneToMany(mappedBy = "multipleChoice", fetch = FetchType.EAGER)
+    private List<MultipleChoiceSelection> multipleChoiceSelections = new ArrayList<MultipleChoiceSelection>();
 
     public void setContent(String content) {
         this.content = content;
@@ -37,11 +36,20 @@ public class MultipleChoice {
         this.id = id;
     }
 
-    public Set<MultipleChoiceSelection> getMultipleChoiceSelections() {
-        return multipleChoiceSelections;
+    public MultipleChoiceSelection getSelectionById(long selectionId) {
+        for (MultipleChoiceSelection multipleChoiceSelection : multipleChoiceSelections) {
+            if (multipleChoiceSelection.getId() == selectionId) {
+                return multipleChoiceSelection;
+            }
+        }
+        return null;
     }
 
-    public void setMultipleChoiceSelections(Set<MultipleChoiceSelection> multipleChoiceSelections) {
+    public void setMultipleChoiceSelections(List<MultipleChoiceSelection> multipleChoiceSelections) {
         this.multipleChoiceSelections = multipleChoiceSelections;
+    }
+
+    public List<MultipleChoiceSelection> getMultipleChoiceSelections() {
+        return multipleChoiceSelections;
     }
 }

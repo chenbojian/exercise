@@ -2,10 +2,10 @@ package com.exercise.web;
 
 
 import com.exercise.core.MultipleChoice;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.exercise.core.MultipleChoiceSelection;
+import com.exercise.core.service.MultipleChoiceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -14,21 +14,36 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/multiple-choice")
 public class MultipleChoiceController {
+
+    private MultipleChoiceService multipleChoiceService;
+
+    @Autowired
+    public MultipleChoiceController(MultipleChoiceService multipleChoiceService) {
+        this.multipleChoiceService = multipleChoiceService;
+    }
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView showMultipleChoicePage() {
         ModelAndView modelAndView = new ModelAndView("multipleChoice");
-        MultipleChoice multipleChoice = new MultipleChoice();
+        MultipleChoice multipleChoice = multipleChoiceService.getMultipleChoice();
         modelAndView.addObject("multipleChoice", multipleChoice);
         return modelAndView;
 
     }
+
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @ResponseBody
-    public String isSelectionRight(UserSelection userSelection){
-        return "ok";
+    public ModelAndView isSelectionRight(long multipleChoiceId, int selectionId) {
+        ModelAndView modelAndView = new ModelAndView("multipleChoice");
+        MultipleChoice multipleChoice = multipleChoiceService.findMultipleChoiceById(multipleChoiceId);
+        modelAndView.addObject("selectionId", selectionId);
+        modelAndView.addObject("multipleChoice", multipleChoice);
+        if (multipleChoice.getSelectionById(selectionId).isAnswer()) {
+            modelAndView.addObject("message", "You are right!");
+        } else {
+            modelAndView.addObject("message", "You are wrong!");
+        }
+        return modelAndView;
     }
 
-    private class UserSelection {
-
-    }
 }
+

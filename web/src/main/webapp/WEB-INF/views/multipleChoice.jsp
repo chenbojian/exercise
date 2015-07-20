@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: chenbojian
@@ -18,19 +19,21 @@
         <p>${multipleChoice.content}</p>
     </div>
     <div>
-        <input type="text" name="multipleChoiceId" value="${multipleChoice.id}"/>
+        <input type="hidden" name="multipleChoiceId" value="${multipleChoice.id}"/>
     </div>
     <div>
-        <div><label><input type="radio" name="selection" value="A"/>选项A</label></div>
-        <div><label><input type="radio" name="selection" value="B"/>选项B</label></div>
-        <div><label><input type="radio" name="selection" value="C"/>选项C</label></div>
-        <div><label><input type="radio" name="selection" value="D"/>选项D</label></div>
+        <c:forEach var="selection" items="${multipleChoice.multipleChoiceSelections}">
+            <div>
+                <label><input type="radio" name="selectionId" value="${selection.id}"/>${selection.content}</label>
+            </div>
+        </c:forEach>
     </div>
     <div>
         <input type="submit" value="提交"/>
         <a href="${pageContext.request.contextPath}/multiple-choice">下一题</a>
     </div>
 </form>
+<p>${message}</p>
 <script>
 </script>
 </body>

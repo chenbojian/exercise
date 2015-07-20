@@ -16,13 +16,13 @@ public class MultipleChoiceSelection {
     private String content;
 
     @Column(name = "is_answer")
-    private boolean answer;
+    private int answer;
 
     @Column(name = "description")
     private String description;
 
     @ManyToOne
-    @Column(name = "multiple_choice_id")
+    @JoinColumn(name = "multiple_choice_id")
     private MultipleChoice multipleChoice;
 
     public long getId() {
@@ -42,11 +42,7 @@ public class MultipleChoiceSelection {
     }
 
     public boolean isAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(boolean answer) {
-        this.answer = answer;
+        return answer == 1;
     }
 
     public String getDescription() {
@@ -63,5 +59,9 @@ public class MultipleChoiceSelection {
 
     public void setMultipleChoice(MultipleChoice multipleChoice) {
         this.multipleChoice = multipleChoice;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
     }
 }
