@@ -32,15 +32,15 @@ flyway {
     user = 'root'
 }
 
-//task initSeed(type:Exec) {
-//    commandLine "mysql", "-u", "root", "-D", "exercise"
-//    standardInput = new FileInputStream("$project.projectDir"+"/src/main/resources/db/seed/init.sql")
-//}
-//
-//task cleanSeed(type:Exec) {
-//    commandLine "mysql", "-u", "root", "-D", "exercise"
-//    standardInput = new FileInputStream("$project.projectDir"+"/src/main/resources/db/seed/clean.sql")
-//}
+task initSeed(type:Exec) {
+    commandLine "mysql", "-u", "root", "-D", "exercise"
+    standardInput = new FileInputStream("$project.projectDir"+"/src/main/resources/db/seed/init.sql")
+}
+
+task cleanSeed(type:Exec) {
+    commandLine "mysql", "-u", "root", "-D", "exercise"
+    standardInput = new FileInputStream("$project.projectDir"+"/src/main/resources/db/seed/clean.sql")
+}
 
 
 
