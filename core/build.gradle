@@ -28,7 +28,7 @@ dependencies {
 }
 
 flyway {
-    url = 'jdbc:mysql://localhost:3306/exercise'
+    url = 'jdbc:mysql://localhost:3306/exercise?characterEncoding=utf8'
     user = 'root'
 }
 
