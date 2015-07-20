@@ -2,10 +2,11 @@ package com.exercise.web;
 
 
 import com.exercise.core.MultipleChoice;
-import com.exercise.core.MultipleChoiceSelection;
 import com.exercise.core.service.MultipleChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MultipleChoiceController {
 
     private MultipleChoiceService multipleChoiceService;
+    private MultipleChoice multipleChoice;
 
     @Autowired
     public MultipleChoiceController(MultipleChoiceService multipleChoiceService) {
@@ -25,7 +27,7 @@ public class MultipleChoiceController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView showMultipleChoicePage() {
         ModelAndView modelAndView = new ModelAndView("multipleChoice");
-        MultipleChoice multipleChoice = multipleChoiceService.getMultipleChoice();
+        multipleChoice = multipleChoiceService.getMultipleChoice();
         modelAndView.addObject("multipleChoice", multipleChoice);
         return modelAndView;
 
@@ -34,7 +36,9 @@ public class MultipleChoiceController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelAndView isSelectionRight(long multipleChoiceId, int selectionId) {
         ModelAndView modelAndView = new ModelAndView("multipleChoice");
-        MultipleChoice multipleChoice = multipleChoiceService.findMultipleChoiceById(multipleChoiceId);
+        if (multipleChoice == null || multipleChoice.getId() != multipleChoiceId) {
+            multipleChoice = multipleChoiceService.findMultipleChoiceById(multipleChoiceId);
+        }
         modelAndView.addObject("selectionId", selectionId);
         modelAndView.addObject("multipleChoice", multipleChoice);
         if (multipleChoice.getSelectionById(selectionId).isAnswer()) {
