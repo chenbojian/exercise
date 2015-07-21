@@ -6,31 +6,38 @@
     <link rel="stylesheet" href="./js/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
 <body ng-controller="multipleChoiceController">
-<div>
-    <div>
-        {{multipleChoice.content}}
-        <div ng-repeat="selection in multipleChoice.multipleChoiceSelections">
-            <input type="radio" name="selection{{multipleChoice.id}}" value="selection.id"/>
-            {{selection.content}}
+<div class="container">
+    <form role="form">
+        <div class="form-group">
+            <h3>{{multipleChoice.content}}</h3>
         </div>
-        <a class="btn btn-default" ng-click="isFinish ? finish() : next_multiple_choice()">下一题</a>
+        <div ng-repeat="selection in multipleChoice.multipleChoiceSelections" class="radio">
+            <label>
+                <input type="radio" ng-model="userSelect.selection" ng-value="selection"/>
+                {{selection.content}}
+            </label>
+        </div>
+        <p ng-show="userSelect.show()">
+            Your answer is <b>{{userSelect.selection.content}}</b>. You are {{userSelect.isRight()}}!
+        </p>
+        <a class="btn btn-default" ng-click="nextMultipleChoice()">下一题</a>
 
-    </div>
+    </form>
 </div>
 <script src="./js/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="./js/bower_components/angular/angular.min.js"></script>
 <script src="./js/app/exerciseApp.js"></script>
 <script>
-//    $(document).ready(function () {
-//        $.getJSON("/web/api/list", function (json) {
-//            json.forEach(function (value) {
-//                console.log(value.content);
-//                value.multipleChoiceSelections.forEach(function (value) {
-//                    console.log(value.answer);
-//                })
-//            })
-//        });
-//    });
+    //    $(document).ready(function () {
+    //        $.getJSON("/web/api/list", function (json) {
+    //            json.forEach(function (value) {
+    //                console.log(value.content);
+    //                value.multipleChoiceSelections.forEach(function (value) {
+    //                    console.log(value.answer);
+    //                })
+    //            })
+    //        });
+    //    });
 </script>
 </body>
 </html>
