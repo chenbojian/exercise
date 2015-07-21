@@ -1,4 +1,4 @@
-var exerciseApp = angular.module("exerciseApp", []);
+var exerciseApp = angular.module("exerciseApp", ["ngRoute"]);
 
 exerciseApp.controller("multipleChoiceController", function ($scope, $http) {
     $http.get("./api/list").success(function (multipleChoices) {
@@ -22,18 +22,36 @@ exerciseApp.controller("multipleChoiceController", function ($scope, $http) {
 
     $scope.userSelect = {
         selection: null,
-        show: function () {
-            return this.selection != null;
-        },
+        show: false,
+        rightOrWrong: "",
         reset: function () {
-            this.selection = null
+            this.selection = null;
+            this.show = false;
+            this.rightOrWrong = "";
         },
-        isRight: function () {
-            if (this.selection != null) {
-                return this.selection.answer ? "right" : "wrong";
+        select: function () {
+            this.show = true;
+            if (this.selection.answer) {
+                $("span.glyphicon").attr("class", "glyphicon glyphicon-ok");
+                this.rightOrWrong = "right";
+            }else {
+                $("span.glyphicon").attr("class", "glyphicon glyphicon-remove");
+                this.rightOrWrong = "wrong";
             }
         }
     };
 
 
 });
+
+exerciseApp.config(["$routeProvider",
+    function ($routeProvider) {
+        $routeProvider.
+            when('/', {
+                templateUrl: "partials/multiple-choice.html",
+                controller: "multipleChoiceController"
+            }).
+            otherwise({
+                redirectTo: "/"
+            })
+    }]);
