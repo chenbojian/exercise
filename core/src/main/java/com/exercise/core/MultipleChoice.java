@@ -23,7 +23,7 @@ public class MultipleChoice {
     private String content;
 
     @OneToMany(mappedBy = "multipleChoice", fetch = FetchType.EAGER)
-    private List<MultipleChoiceSelection> multipleChoiceSelections = new ArrayList<MultipleChoiceSelection>();
+    private Set<MultipleChoiceSelection> multipleChoiceSelections = new HashSet<MultipleChoiceSelection>();
 
     public void setContent(String content) {
         this.content = content;
@@ -50,11 +50,11 @@ public class MultipleChoice {
         return null;
     }
 
-    public void setMultipleChoiceSelections(List<MultipleChoiceSelection> multipleChoiceSelections) {
+    public void setMultipleChoiceSelections(Set<MultipleChoiceSelection> multipleChoiceSelections) {
         this.multipleChoiceSelections = multipleChoiceSelections;
     }
 
-    public List<MultipleChoiceSelection> getMultipleChoiceSelections() {
+    public Set<MultipleChoiceSelection> getMultipleChoiceSelections() {
         return multipleChoiceSelections;
     }
 }

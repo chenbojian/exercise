@@ -7,11 +7,11 @@ exerciseApp.controller("multipleChoiceController", function ($scope, $http) {
         $scope.multipleChoice = multipleChoices[i];
 
         $scope.nextMultipleChoice = function () {
-            if (i == multipleChoices.length) {
+            if (i == multipleChoices.length - 1) {
                 alert("finish");
                 return;
             }
-            if (i == multipleChoices.length - 1) {
+            if (i == multipleChoices.length - 2) {
                 $("a.btn").text("完成");
             }
             $scope.multipleChoice = multipleChoices[i++ + 1];
@@ -29,7 +29,9 @@ exerciseApp.controller("multipleChoiceController", function ($scope, $http) {
             this.selection = null
         },
         isRight: function () {
-            return this.selection.answer ? "right" : "wrong";
+            if (this.selection != null) {
+                return this.selection.answer ? "right" : "wrong";
+            }
         }
     };
 
