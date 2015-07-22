@@ -1,6 +1,8 @@
 package com.exercise.core.DAO;
 
 import com.exercise.core.Quiz;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class QuizDAO {
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    public QuizDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     public Quiz findQuizById(long id) {
-        return null;
+        return (Quiz) sessionFactory.getCurrentSession().get(Quiz.class, id);
     }
 }

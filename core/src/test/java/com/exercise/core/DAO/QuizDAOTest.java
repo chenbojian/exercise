@@ -26,7 +26,7 @@ public class QuizDAOTest {
 
     @Test
     public void should_get_name_of_quiz() {
-        Quiz quiz = quizDAO.findQuizById(0);
+        Quiz quiz = quizDAO.findQuizById(1);
         assertThat(quiz.getName(),is("abc"));
     }
 
