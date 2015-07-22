@@ -43,21 +43,28 @@ exerciseApp.controller("multipleChoiceController", function ($scope, $http) {
 
 exerciseApp.controller("inputMultipleChoiceController", function ($scope, $http) {
     var Selection = function () {
-        this.content = "";
+        this.content = null;
         this.answer = false;
-        this.description = "";
+        this.description = null;
     };
 
-    $scope.multipleChoice = {
-        content: "",
-        multipleChoiceSelections: [
+    var MultipleChoice = function () {
+        this.content = null;
+        this.multipleChoiceSelections = [
+            new Selection(),
             new Selection(),
             new Selection(),
             new Selection()
-        ]
+        ];
     };
+
+    $scope.multipleChoice = new MultipleChoice();
+
     $scope.addSelection = function () {
         $scope.multipleChoice.multipleChoiceSelections.push(new Selection());
+    };
+    $scope.removeSelection = function () {
+        $scope.multipleChoice.multipleChoiceSelections.pop();
     };
     $scope.chooseRightAnswer = function ($index) {
         $scope.multipleChoice.multipleChoiceSelections
@@ -66,7 +73,11 @@ exerciseApp.controller("inputMultipleChoiceController", function ($scope, $http)
             });
     };
     $scope.submit = function () {
-        $http.post("./api/multiple-choice/submit", $scope.multipleChoice);
+        $http.post("./api/multiple-choice/submit", $scope.multipleChoice)
+            .success(function () {
+                $scope.multipleChoice = new MultipleChoice();
+            });
+
     }
 });
 

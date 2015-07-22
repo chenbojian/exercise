@@ -9,7 +9,7 @@
                 {{selection.content}}
             </label>
         </div>
-        <p ng-show="userSelect.show">
+        <p ng-if="userSelect.show">
             Your answer is <strong>{{userSelect.selection.content}}</strong>. You are {{userSelect.rightOrWrong}}!
             <span class="glyphicon" aria-hidden="true"></span>
         </p>
