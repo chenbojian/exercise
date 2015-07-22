@@ -1,19 +1,19 @@
 <div class="container">
-    <form role="form">
-        <div class="form-group">
-            <h3>{{multipleChoice.content}}</h3>
-        </div>
-        <div ng-repeat="selection in multipleChoice.multipleChoiceSelections" class="radio">
-            <label>
-                <input type="radio" ng-model="userSelect.selection" ng-value="selection" ng-change="userSelect.select()"/>
-                {{selection.content}}
-            </label>
-        </div>
-        <p ng-if="userSelect.show">
-            Your answer is <strong>{{userSelect.selection.content}}</strong>. You are {{userSelect.rightOrWrong}}!
-            <span class="glyphicon" aria-hidden="true"></span>
-        </p>
-        <a class="btn btn-default" ng-click="nextMultipleChoice()">下一题</a>
+  <form role="form">
+    <div class="form-group">
+      <h3>{{multipleChoice.content}}</h3>
+    </div>
+    <div ng-repeat="selection in multipleChoice.multipleChoiceSelections" class="radio">
+      <label>
+        <input type="radio" ng-model="userSelect.selection" ng-value="selection" ng-change="userSelect.select()"/>
+        {{selection.content}}
+      </label>
+    </div>
+    <p ng-if="userSelect.show">
+      Your answer is <strong>{{userSelect.selection.content}}</strong>. You are {{userSelect.rightOrWrong}}!
+      <span class="glyphicon" aria-hidden="true"></span>
+    </p>
+    <a class="btn btn-default" ng-click="nextMultipleChoice()">下一题</a>
 
-    </form>
+  </form>
 </div>
