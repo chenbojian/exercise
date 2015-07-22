@@ -70,7 +70,9 @@ exerciseApp.controller("inputMultipleChoiceController", function ($scope, $http)
         $scope.multipleChoice.multipleChoiceSelections
             .forEach(function (value, index) {
                 value.answer = index == $index;
+                console.log( value.answer);
             });
+        console.log("----------------");
     };
     $scope.submit = function () {
         $http.post("./api/multiple-choice/submit", $scope.multipleChoice)
