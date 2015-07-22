@@ -30,4 +30,11 @@ public class QuizDAOTest {
         assertThat(quiz.getName(),is("abc"));
     }
 
+    @Test
+    public void should_get_correct_multiple_choice() {
+        Quiz quiz = quizDAO.findQuizById(1);
+        assertThat(quiz.getMultipleChoices().size(), is(3));
+
+    }
+
 }
