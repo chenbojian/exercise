@@ -17,14 +17,12 @@
                  required/>
         </div>
 
-        <div class="col-sm-2">
-          <div class="radio">
-            <label>
-              <input type="radio" name="answer" ng-model="selection.answer" ng-value="true"
-                     ng-change="chooseRightAnswer($index)" required/>
-              正确答案
-            </label>
-          </div>
+        <div class="col-sm-2 radio">
+          <label>
+            <input type="radio" name="answer" ng-model="selection.answer" ng-value="true"
+                   ng-change="chooseRightAnswer($index)" required/>
+            正确答案
+          </label>
         </div>
       </div>
       <div class="row">
