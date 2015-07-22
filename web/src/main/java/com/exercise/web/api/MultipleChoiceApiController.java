@@ -3,6 +3,7 @@ package com.exercise.web.api;
 import com.exercise.core.MultipleChoice;
 import com.exercise.core.MultipleChoiceSelection;
 import com.exercise.core.service.MultipleChoiceService;
+import com.exercise.core.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,18 +17,24 @@ import java.util.List;
 @RequestMapping("/api/multiple-choice")
 public class MultipleChoiceApiController {
 
-
     private MultipleChoiceService multipleChoiceService;
+    private QuizService quizService;
 
     @Autowired
-    public MultipleChoiceApiController(MultipleChoiceService multipleChoiceService) {
+    public MultipleChoiceApiController(MultipleChoiceService multipleChoiceService, QuizService quizService) {
         this.multipleChoiceService = multipleChoiceService;
+        this.quizService = quizService;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public List<MultipleChoice> listOfMultipleChoice() {
         return multipleChoiceService.listMultipleChoice();
+    }
+
+    @RequestMapping(value = "/list-from-quiz/{id}", method = RequestMethod.GET)
+    public List<MultipleChoice> listOfMultipleChoiceFromQuiz(@PathVariable("id") long id){
+        return quizService.listMultipleChoiceFromQuizById(id);
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
