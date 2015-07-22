@@ -19,3 +19,8 @@ INSERT INTO multiple_choice_selection(multiple_choice_id, content, is_answer, de
 INSERT INTO multiple_choice_selection(multiple_choice_id, content, is_answer, description) VALUES (5,"select 1",0,NULL);
 INSERT INTO multiple_choice_selection(multiple_choice_id, content, is_answer, description) VALUES (5,"select 5",1,NULL);
 
+INSERT INTO quiz(name) VALUES ("abc");
+
+INSERT INTO multiple_choice_of_quiz(quiz_id, multiple_choice_id) VALUES (1,1);
+INSERT INTO multiple_choice_of_quiz(quiz_id, multiple_choice_id) VALUES (1,2);
+INSERT INTO multiple_choice_of_quiz(quiz_id, multiple_choice_id) VALUES (1,3);
