@@ -22,7 +22,7 @@ public class MultipleChoice {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "multipleChoice", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "multipleChoice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MultipleChoiceSelection> multipleChoiceSelections = new HashSet<MultipleChoiceSelection>();
 
     public void setContent(String content) {

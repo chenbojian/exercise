@@ -31,13 +31,13 @@ public class MultipleChoiceApiController {
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public void addMultipleChoice(@RequestBody MultipleChoice multipleChoice){
-        System.out.println(multipleChoice.getContent()+"----------------");
-        System.out.println(multipleChoice.getMultipleChoiceSelections()+"----------------");
-        System.out.println(multipleChoice.getMultipleChoiceSelections().size()+"----------------");
+    public void addMultipleChoice(@RequestBody MultipleChoice multipleChoice) {
         for (MultipleChoiceSelection multipleChoiceSelection : multipleChoice.getMultipleChoiceSelections()) {
-            System.out.println(multipleChoiceSelection.getContent()+"----------------");
-            System.out.println(multipleChoiceSelection.isAnswer()+"----------------");
+            if (multipleChoiceSelection.getMultipleChoice() == null) {
+                multipleChoiceSelection.setMultipleChoice(multipleChoice);
+                System.out.println("-----------");
+            }
         }
+        multipleChoiceService.save(multipleChoice);
     }
 }

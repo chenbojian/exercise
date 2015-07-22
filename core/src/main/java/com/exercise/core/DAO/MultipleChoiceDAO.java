@@ -31,4 +31,8 @@ public class MultipleChoiceDAO {
                 .createQuery("from MultipleChoice")
                 .list();
     }
+
+    public void save(MultipleChoice multipleChoice) {
+        sessionFactory.getCurrentSession().save(multipleChoice);
+    }
 }

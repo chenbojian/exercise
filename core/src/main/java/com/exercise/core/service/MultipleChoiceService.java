@@ -39,4 +39,8 @@ public class MultipleChoiceService {
     public List<MultipleChoice> listMultipleChoice() {
         return multipleChoiceDAO.listMultipleChoice();
     }
+
+    public void save(MultipleChoice multipleChoice) {
+        multipleChoiceDAO.save(multipleChoice);
+    }
 }
