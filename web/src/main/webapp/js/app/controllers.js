@@ -1,4 +1,4 @@
-var exerciseControllers = angular.module("exerciseControllers",[]);
+var exerciseControllers = angular.module("exerciseControllers", []);
 
 exerciseControllers.controller("multipleChoiceController", function ($scope, $http) {
     $http.get("./api/multiple-choice/list").success(function (multipleChoices) {
@@ -70,9 +70,7 @@ exerciseControllers.controller("inputMultipleChoiceController", function ($scope
         $scope.multipleChoice.multipleChoiceSelections
             .forEach(function (value, index) {
                 value.answer = index == $index;
-                console.log( value.answer);
             });
-        console.log("----------------");
     };
     $scope.submit = function () {
         $http.post("./api/multiple-choice/submit", $scope.multipleChoice)
@@ -80,5 +78,23 @@ exerciseControllers.controller("inputMultipleChoiceController", function ($scope
                 $scope.multipleChoice = new MultipleChoice();
             });
 
+    }
+});
+
+exerciseControllers.controller("generateQuizController", function ($scope, $http) {
+    $http.get("api/quiz/list-multiple-choice").
+        success(function (data) {
+            $scope.multipleChoices = data;
+        });
+    var chooses = [];
+    $scope.choose = function (multipleChoice) {
+        var idx = chooses.indexOf(multipleChoice);
+        if (idx == -1) {
+            chooses.push(multipleChoice);
+            console.log(multipleChoice.content);
+        } else {
+            chooses.splice(idx, 1);
+            console.log(multipleChoice.content+"--remove");
+        }
     }
 });

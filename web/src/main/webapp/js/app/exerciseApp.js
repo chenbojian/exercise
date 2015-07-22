@@ -21,6 +21,10 @@ exerciseApp.config(["$routeProvider",
                 templateUrl: "partials/input-multiple-choice.html",
                 controller: "inputMultipleChoiceController"
             }).
+            when('/generate-quiz',{
+                templateUrl: "partials/generate-quiz.html",
+                controller: "generateQuizController"
+            }).
             otherwise({
                 redirectTo: "/"
             })

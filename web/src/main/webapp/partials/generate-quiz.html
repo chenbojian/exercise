@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Choose</th>
+      <th>Question</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="multipleChoice in multipleChoices">
+      <th>
+        <label>
+          <input type="checkbox" ng-click="choose(multipleChoice)"/>
+        </label>
+      </th>
+      <th>
+        {{multipleChoice.content}}
+        <ul>
+          <li ng-repeat="selection in multipleChoice.multipleChoiceSelections">
+            {{selection.content}}
+          </li>
+        </ul>
+      </th>
+      <th>[][]</th>
+    </tr>
+    </tbody>
+  </table>
+</div>
