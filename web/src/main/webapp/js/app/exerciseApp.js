@@ -3,7 +3,6 @@ var exerciseApp = angular.module("exerciseApp", [
     "exerciseControllers"
 ]);
 
-
 exerciseApp.filter("toABCD", function () {
     return function (data) {
         return String.fromCharCode(data + 65);
