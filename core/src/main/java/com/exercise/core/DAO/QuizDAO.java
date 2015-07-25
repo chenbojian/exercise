@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by chenbojian on 7/22/15.
  */
@@ -21,5 +23,10 @@ public class QuizDAO {
 
     public Quiz findQuizById(long id) {
         return (Quiz) sessionFactory.getCurrentSession().get(Quiz.class, id);
+    }
+
+    public List<Quiz> listQuiz() {
+        return sessionFactory.getCurrentSession().createQuery("from Quiz")
+                .list();
     }
 }

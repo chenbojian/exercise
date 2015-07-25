@@ -99,3 +99,10 @@ exerciseControllers.controller("generateQuizController", function ($scope, $http
         }
     }
 });
+
+exerciseControllers.controller("listQuizController", function ($scope, $http) {
+    $http.get("api/quiz/list").
+        success(function (data) {
+            $scope.quizes = data;
+        })
+});

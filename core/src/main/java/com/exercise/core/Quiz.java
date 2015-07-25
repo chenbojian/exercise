@@ -1,5 +1,9 @@
 package com.exercise.core;
 
+import com.exercise.core.jsonView.Views;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +15,11 @@ import java.util.List;
 @Table(name = "quiz")
 public class Quiz {
     @Id
+    @JsonView(Views.QuizInfo.class)
     private long id;
 
     @Column(name = "name")
+    @JsonView(Views.QuizInfo.class)
     private String name;
 
     @OneToMany
@@ -22,6 +28,7 @@ public class Quiz {
             joinColumns = @JoinColumn(name = "quiz_id"),
             inverseJoinColumns = @JoinColumn(name = "multiple_choice_id")
     )
+    @JsonView
     private List<MultipleChoice> multipleChoices = new ArrayList<MultipleChoice>();
 
     public List<MultipleChoice> getMultipleChoices() {

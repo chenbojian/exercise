@@ -28,4 +28,8 @@ public class QuizService {
     public Quiz findQuizById(long id) {
         return quizDAO.findQuizById(id);
     }
+
+    public List<Quiz> listQuiz() {
+        return quizDAO.listQuiz();
+    }
 }
