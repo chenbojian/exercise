@@ -31,5 +31,5 @@ exerciseApp.config(["$routeProvider",
             }).
             otherwise({
                 redirectTo: "/"
-            })
+            });
     }]);
