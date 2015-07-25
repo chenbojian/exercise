@@ -13,9 +13,13 @@ exerciseApp.filter("toABCD", function () {
 exerciseApp.config(["$routeProvider",
     function ($routeProvider) {
         $routeProvider.
-            when('/', {
-                templateUrl: "partials/multiple-choice.html",
-                controller: "multipleChoiceController"
+            when('/',{
+                templateUrl: "partials/quiz-list.html",
+                controller: "listQuizController"
+            }).
+            when('/quiz/:quizId', {
+                templateUrl: "partials/quiz.html",
+                controller: "quizController"
             }).
             when('/input-multiple-choice', {
                 templateUrl: "partials/input-multiple-choice.html",

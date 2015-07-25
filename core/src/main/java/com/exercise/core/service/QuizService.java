@@ -24,4 +24,8 @@ public class QuizService {
         Quiz quiz = quizDAO.findQuizById(id);
         return quiz.getMultipleChoices();
     }
+
+    public Quiz findQuizById(long id) {
+        return quizDAO.findQuizById(id);
+    }
 }

@@ -1,8 +1,9 @@
 var exerciseControllers = angular.module("exerciseControllers", []);
 
-exerciseControllers.controller("multipleChoiceController", function ($scope, $http) {
-    $http.get("./api/multiple-choice/list").success(function (multipleChoices) {
+exerciseControllers.controller("quizController", function ($scope, $http, $routeParams) {
+    $http.get("./api/quiz/" + $routeParams.quizId).success(function (quiz) {
         var i = 0;
+        var multipleChoices = quiz.multipleChoices;
         $scope.multipleChoice = multipleChoices[i];
 
         $scope.nextMultipleChoice = function () {
@@ -94,7 +95,7 @@ exerciseControllers.controller("generateQuizController", function ($scope, $http
             console.log(multipleChoice.content);
         } else {
             chooses.splice(idx, 1);
-            console.log(multipleChoice.content+"--remove");
+            console.log(multipleChoice.content + "--remove");
         }
     }
 });
