@@ -2,6 +2,12 @@ var exerciseApp = angular.module("exerciseApp", [
     "ngRoute",
     "exerciseControllers"
 ]);
+exerciseApp.controller("mainController", function () {
+    $('.nav a').on("click",function () {
+        $('.nav li').removeClass("active");
+        $(this).parent().addClass("active");
+    });
+});
 
 exerciseApp.filter("toABCD", function () {
     return function (data) {

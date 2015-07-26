@@ -1,29 +1,41 @@
 <div class="container">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Choose</th>
-      <th>Question</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="multipleChoice in multipleChoices">
-      <th>
-        <label>
-          <input type="checkbox" ng-click="choose(multipleChoice)"/>
-        </label>
-      </th>
-      <th>
-        {{multipleChoice.content}}
-        <ul>
-          <li ng-repeat="selection in multipleChoice.multipleChoiceSelections">
-            {{selection.content}}
-          </li>
-        </ul>
-      </th>
-      <th>[][]</th>
-    </tr>
-    </tbody>
-  </table>
+  <form ng-submit="submitQuiz()">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Choose</th>
+        <th>Question</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="multipleChoice in multipleChoices">
+        <th>
+          <label>
+            <input type="checkbox" ng-click="choose(multipleChoice)"/>
+          </label>
+        </th>
+        <th>
+          {{multipleChoice.content}}
+          <ul>
+            <li ng-repeat="selection in multipleChoice.multipleChoiceSelections">
+              {{selection.content}}
+            </li>
+          </ul>
+        </th>
+        <th>
+          <button class="btn btn-default">修改</button>
+          <button class="btn btn-default">删除</button>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <label>
+      练习名称:
+      <input type="text" ng-model="quiz.name" required/>
+    </label>
+    <button class="btn btn-default" type="submit">生成练习</button>
+  </form>
 </div>

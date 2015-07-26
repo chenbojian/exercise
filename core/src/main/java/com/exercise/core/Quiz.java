@@ -1,12 +1,11 @@
 package com.exercise.core;
 
 import com.exercise.core.jsonView.Views;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by chenbojian on 7/22/15.
@@ -15,6 +14,7 @@ import java.util.List;
 @Table(name = "quiz")
 public class Quiz {
     @Id
+    @GeneratedValue
     @JsonView(Views.QuizInfo.class)
     private long id;
 
@@ -29,15 +29,8 @@ public class Quiz {
             inverseJoinColumns = @JoinColumn(name = "multiple_choice_id")
     )
     @JsonView
-    private List<MultipleChoice> multipleChoices = new ArrayList<MultipleChoice>();
+    private Set<MultipleChoice> multipleChoices = new HashSet<MultipleChoice>();
 
-    public List<MultipleChoice> getMultipleChoices() {
-        return multipleChoices;
-    }
-
-    public void setMultipleChoices(List<MultipleChoice> multipleChoices) {
-        this.multipleChoices = multipleChoices;
-    }
 
     public String getName() {
         return name;
@@ -53,5 +46,13 @@ public class Quiz {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Set<MultipleChoice> getMultipleChoices() {
+        return multipleChoices;
+    }
+
+    public void setMultipleChoices(Set<MultipleChoice> multipleChoices) {
+        this.multipleChoices = multipleChoices;
     }
 }

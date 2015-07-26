@@ -29,4 +29,8 @@ public class QuizDAO {
         return sessionFactory.getCurrentSession().createQuery("from Quiz")
                 .list();
     }
+
+    public void save(Quiz quiz) {
+        sessionFactory.getCurrentSession().save(quiz);
+    }
 }

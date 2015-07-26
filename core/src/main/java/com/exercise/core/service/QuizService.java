@@ -20,16 +20,15 @@ public class QuizService {
         this.quizDAO = quizDAO;
     }
 
-    public List<MultipleChoice> listMultipleChoiceFromQuizById(long id) {
-        Quiz quiz = quizDAO.findQuizById(id);
-        return quiz.getMultipleChoices();
-    }
-
     public Quiz findQuizById(long id) {
         return quizDAO.findQuizById(id);
     }
 
     public List<Quiz> listQuiz() {
         return quizDAO.listQuiz();
+    }
+
+    public void save(Quiz quiz) {
+        quizDAO.save(quiz);
     }
 }

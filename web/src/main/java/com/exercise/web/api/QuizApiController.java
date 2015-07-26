@@ -14,7 +14,9 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by chenbojian on 7/22/15.
@@ -48,5 +50,18 @@ public class QuizApiController {
     public String listQuiz(ObjectMapper objectMapper) throws JsonProcessingException {
         return objectMapper.writerWithView(Views.QuizInfo.class)
                 .writeValueAsString(quizService.listQuiz());
+    }
+    
+    @RequestMapping(value = "/generate", method = RequestMethod.POST)
+    public void generateQuiz(@RequestBody Quiz quiz) {
+        Set<MultipleChoice> persistMultipleChoices = new HashSet<MultipleChoice>();
+        for (MultipleChoice multipleChoice : quiz.getMultipleChoices()) {
+            MultipleChoice persistMultipleChoice =
+                    multipleChoiceService.findMultipleChoiceById(multipleChoice.getId());
+            persistMultipleChoices.add(persistMultipleChoice);
+        }
+        quiz.setMultipleChoices(persistMultipleChoices);
+
+        quizService.save(quiz);
     }
 }

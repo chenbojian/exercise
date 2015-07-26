@@ -30,7 +30,6 @@ exerciseControllers.controller("quizController", function ($scope, $http, $route
             this.rightOrWrong = "";
         },
         select: function () {
-            this.show = true;
             if (this.selection.answer) {
                 $("span.glyphicon").attr("class", "glyphicon glyphicon-ok");
                 this.rightOrWrong = "right";
@@ -38,6 +37,7 @@ exerciseControllers.controller("quizController", function ($scope, $http, $route
                 $("span.glyphicon").attr("class", "glyphicon glyphicon-remove");
                 this.rightOrWrong = "wrong";
             }
+            this.show = true;
         }
     };
 });
@@ -87,16 +87,31 @@ exerciseControllers.controller("generateQuizController", function ($scope, $http
         success(function (data) {
             $scope.multipleChoices = data;
         });
-    var chooses = [];
+    $scope.quiz = {
+        id: 0,
+        name: "",
+        multipleChoices: []
+    };
+
     $scope.choose = function (multipleChoice) {
-        var idx = chooses.indexOf(multipleChoice);
+        var multipleChoices = $scope.quiz.multipleChoices;
+        var idx = multipleChoices.indexOf(multipleChoice);
         if (idx == -1) {
-            chooses.push(multipleChoice);
-            console.log(multipleChoice.content);
+            multipleChoices.push(multipleChoice);
         } else {
-            chooses.splice(idx, 1);
-            console.log(multipleChoice.content + "--remove");
+            multipleChoices.splice(idx, 1);
         }
+    };
+
+    $scope.submitQuiz = function () {
+        if($scope.quiz.multipleChoices.length == 0){
+            alert("至少应该选择一道题!");
+            return;
+        }
+        $http.post("api/quiz/generate",$scope.quiz).
+            success(function () {
+                alert("success");
+            });
     }
 });
 

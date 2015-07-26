@@ -6,7 +6,6 @@ import com.exercise.core.service.MultipleChoiceService;
 import com.exercise.core.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -18,23 +17,16 @@ import java.util.List;
 public class MultipleChoiceApiController {
 
     private MultipleChoiceService multipleChoiceService;
-    private QuizService quizService;
 
     @Autowired
-    public MultipleChoiceApiController(MultipleChoiceService multipleChoiceService, QuizService quizService) {
+    public MultipleChoiceApiController(MultipleChoiceService multipleChoiceService) {
         this.multipleChoiceService = multipleChoiceService;
-        this.quizService = quizService;
     }
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public List<MultipleChoice> listOfMultipleChoice() {
         return multipleChoiceService.listMultipleChoice();
-    }
-
-    @RequestMapping(value = "/list-from-quiz/{id}", method = RequestMethod.GET)
-    public List<MultipleChoice> listOfMultipleChoiceFromQuiz(@PathVariable("id") long id){
-        return quizService.listMultipleChoiceFromQuizById(id);
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
